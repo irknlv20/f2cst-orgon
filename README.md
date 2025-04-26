@@ -56,7 +56,7 @@ F2CST — это токен стандарта **oRC20** для блокчейн
 - `finishMinting()`: (Только Owner) Остановить возможность дальнейшего выпуска токенов (после вызова mint будет заблокирован).
 - `pause()`: (Только Owner) Приостановить работу контракта.
 - `unpause()`: (Только Owner) Возобновить работу контракта.
-- `withdrawOrgon(address payable to, uint value)`: (Только Owner) Вывести ORGON (nativ токены) с контракта.
+- `withdrawOrgon(address payable to, uint value)`: (Только Owner) Вывести ORGON (native токены) с контракта.
 - `withdrawTokensTransfer(IoRC20 token, address payable to, uint256 value)`: (Только Owner) Перевести токены (по интерфейсу IoRC20) с контракта на указанный адрес.
 - `withdrawTokensTransferFrom(IoRC20 token, address payable from, address payable to, uint256 value)`: (Только Owner) Перевести токены между двумя сторонними адресами.
 - `withdrawTokensApprove(IoRC20 token, address spender, uint256 value)`: (Только Owner) Одобрить перевод токенов стороннему адресу.
