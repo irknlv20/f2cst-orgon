@@ -220,15 +220,11 @@ const contractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"name": "_value",
+				"name": "amount",
 				"type": "uint256"
 			}
 		],
-		"name": "withdrawEther",
+		"name": "repayment",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -238,11 +234,15 @@ const contractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "amount",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"name": "_value",
 				"type": "uint256"
 			}
 		],
-		"name": "repayment",
+		"name": "withdrawOrgon",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -592,7 +592,7 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "WithdrawEther",
+		"name": "WithdrawOrgon",
 		"type": "event"
 	},
 	{
