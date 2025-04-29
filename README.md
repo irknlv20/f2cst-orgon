@@ -1,102 +1,104 @@
+📄 This README is also available in: [🇷🇺 Russian](README.ru.md)
+
 # F2CST Token
 
-F2CST — это токен стандарта **oRC20** для блокчейна **ORGON**.  
-Контракт реализует стандартные функции токена, а также расширенные возможности:  
-✓ Mint (создание новых токенов)  
-✓ Burn (сжигание токенов)  
-✓ Rewards (награды держателям токенов)  
-✓ Управление администраторами  
-✓ Приостановка работы контракта (Pause/Unpause)  
-✓ Вывод токенов и средств владельцем контракта
+F2CST is an **oRC20** standard token for the **ORGON** blockchain.  
+The contract implements standard token functions and additional features such as:  
+- Minting (creating new tokens)  
+- Burning (destroying tokens)  
+- Rewards for token holders  
+- Administrator management  
+- Contract pausing/resuming  
+- Token and fund withdrawals by the contract owner
 
 ---
 
-## Основная информация
+## Basic Information
 
-| Параметр        | Значение       |
-|-----------------|----------------|
-| Название токена | F2CST           |
-| Символ          | F2CST           |
-| Десятичные      | 4               |
-| Стандарт        | oRC20           |
-| Максимальная эмиссия (Cap) | 1,000,000.0000 F2CST (100000 × 1e4) |
-
----
-
-## Развертывание
-
-- Блокчейн: **ORGON**
-- Стандарт: **oRC20 (интерфейс IoRC20)**
+| Parameter         | Value              |
+|------------------|--------------------|
+| Token Name       | F2CST              |
+| Symbol           | F2CST              |
+| Decimals         | 4                  |
+| Standard         | oRC20              |
+| Max Supply (Cap) | 100,000.0000 F2CST |
 
 ---
 
-## Внешние функции контракта
+## Deployment
 
-### Стандартные функции (oRC20)
-
-- `transfer(address payable to, uint256 value)`: Перевести токены на другой адрес.
-- `approve(address spender, uint256 value)`: Одобрить стороннему адресу перевод указанного количества токенов.
-- `transferFrom(address payable from, address payable to, uint256 value)`: Перевести токены от имени другого пользователя.
-- `totalSupply()`: Получить общее количество выпущенных токенов.
-- `balanceOf(address owner)`: Узнать баланс токенов по адресу.
-- `allowance(address owner, address spender)`: Узнать сколько токенов разрешено потратить стороннему адресу.
+- Blockchain: **ORGON**
+- Standard: **oRC20 (IoRC20 interface)**
 
 ---
 
-### Дополнительные функции
+## Public Contract Functions
 
-#### Управление токенами
+### Standard oRC20 Functions
 
-- `mint(address to, uint256 value)`: (Только Owner) Выпустить новые токены.
-- `burn(uint256 value)`: Сжечь токены на своем адресе.
-- `burnFrom(address from, uint256 value)`: Сжечь токены с другого адреса (если есть разрешение).
-
-#### Управление контрактом
-
-- `finishMinting()`: (Только Owner) Остановить возможность дальнейшего выпуска токенов (после вызова mint будет заблокирован).
-- `pause()`: (Только Owner) Приостановить работу контракта.
-- `unpause()`: (Только Owner) Возобновить работу контракта.
-- `withdrawOrgon(address payable to, uint value)`: (Только Owner) Вывести ORGON (nativ токены) с контракта.
-- `withdrawTokensTransfer(IoRC20 token, address payable to, uint256 value)`: (Только Owner) Перевести токены (по интерфейсу IoRC20) с контракта на указанный адрес.
-- `withdrawTokensTransferFrom(IoRC20 token, address payable from, address payable to, uint256 value)`: (Только Owner) Перевести токены между двумя сторонними адресами.
-- `withdrawTokensApprove(IoRC20 token, address spender, uint256 value)`: (Только Owner) Одобрить перевод токенов стороннему адресу.
-
-#### Управление администраторами
-
-- `addManager(address manager)`: (Только Owner) Добавить менеджера.
-- `removeManager(address manager)`: (Только Owner) Удалить менеджера.
-- `isManager(address manager)`: Проверить, является ли адрес менеджером.
-- `getManagers()`: Получить список менеджеров.
-
-#### Система наград (Rewards)
-
-- `repayment(uint amount)`: (Только Owner) Загрузить средства для распределения наград.
-- `reward()`: Запросить свою награду на основе доли владения токенами.
-- `availableRewards(address account)`: Посмотреть сколько награды доступно адресу.
+- `transfer(address payable to, uint256 value)`: Transfer tokens to another address.
+- `approve(address spender, uint256 value)`: Approve a third-party address to spend tokens.
+- `transferFrom(address payable from, address payable to, uint256 value)`: Transfer tokens on behalf of another user.
+- `totalSupply()`: Get the total number of issued tokens.
+- `balanceOf(address owner)`: Get token balance of an address.
+- `allowance(address owner, address spender)`: Check how many tokens are allowed for spending by a third-party.
 
 ---
 
-## Важные события
+### Additional Functions
 
-- `Transfer(address from, address to, uint256 value)`: При переводе токенов.
-- `Approval(address owner, address spender, uint256 value)`: При одобрении перевода токенов.
-- `MintFinished(address account)`: Завершение выпуска токенов.
-- `Paused(address account)`: Контракт приостановлен.
-- `Unpaused(address account)`: Контракт возобновлен.
-- `Repayment(address from, uint256 amount)`: Пополнение системы наград.
-- `Reward(address to, uint256 amount)`: Получение награды держателем токенов.
-- `WithdrawOrgon(address to, uint256 value)`: Вывод ORGON средств с контракта.
+#### Token Management
+
+- `mint(address to, uint256 value)`: (Owner only) Mint new tokens.
+- `burn(uint256 value)`: Burn tokens from own address.
+- `burnFrom(address from, uint256 value)`: Burn tokens from another address (if approved).
+
+#### Contract Management
+
+- `finishMinting()`: (Owner only) Permanently disable further token minting.
+- `pause()`: (Owner only) Pause the contract.
+- `unpause()`: (Owner only) Resume the contract.
+- `withdrawOrgon(address payable to, uint value)`: (Owner only) Withdraw ORGON (native tokens) from the contract.
+- `withdrawTokensTransfer(IoRC20 token, address payable to, uint256 value)`: (Owner only) Transfer IoRC20 tokens from the contract.
+- `withdrawTokensTransferFrom(IoRC20 token, address payable from, address payable to, uint256 value)`: (Owner only) Transfer tokens between third-party addresses.
+- `withdrawTokensApprove(IoRC20 token, address spender, uint256 value)`: (Owner only) Approve token spending for a third-party address.
+
+#### Administrator Management
+
+- `addManager(address manager)`: (Owner only) Add a manager.
+- `removeManager(address manager)`: (Owner only) Remove a manager.
+- `isManager(address manager)`: Check if an address is a manager.
+- `getManagers()`: Get the list of managers.
+
+#### Reward System
+
+- `repayment(uint amount)`: (Owner only) Load funds for reward distribution.
+- `reward()`: Claim your reward based on token ownership.
+- `availableRewards(address account)`: View available rewards for an address.
 
 ---
 
-## Важно
+## Important Events
 
-- После вызова `finishMinting()` токены больше нельзя выпускать.
-- После `pause()` функции токена могут быть ограничены для защиты в критических ситуациях.
-- Все операции управления доступны только владельцу контракта (**Owner**).
+- `Transfer(address from, address to, uint256 value)`: Token transfer event.
+- `Approval(address owner, address spender, uint256 value)`: Token approval event.
+- `MintFinished(address account)`: Minting disabled.
+- `Paused(address account)`: Contract paused.
+- `Unpaused(address account)`: Contract resumed.
+- `Repayment(address from, uint256 amount)`: Rewards funded.
+- `Reward(address to, uint256 amount)`: Reward claimed by a holder.
+- `WithdrawOrgon(address to, uint256 value)`: ORGON withdrawn from the contract.
 
 ---
 
-## О проекте
+## Notes
 
-Токен F2CST — это гибкий финансовый инструмент с поддержкой вознаграждений, безопасной системой управления и соблюдением стандарта oRC20 для блокчейна ORGON.
+- After calling `finishMinting()`, token minting is permanently disabled.
+- `pause()` can restrict contract functions to protect in critical situations.
+- All administrative operations are restricted to the contract **Owner**.
+
+---
+
+## About the Project
+
+The F2CST token is a flexible financial instrument with reward support, a secure management system, and compliance with the oRC20 standard for the ORGON blockchain.
